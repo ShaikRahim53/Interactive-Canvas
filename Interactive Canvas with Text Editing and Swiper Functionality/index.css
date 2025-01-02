@@ -1,0 +1,619 @@
+/* Fullscreen body with no overflow */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+/* Swiper Container */
+.swiper-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Swiper Slide Canvas */
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Canvas with 9:16 ratio */
+.canvas {
+  width: auto;
+  height: 80%;
+  left: 302px;
+  aspect-ratio: 9 / 16;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border: 12px solid #333;
+  position: absolute;
+  z-index: 1; /* Make sure the canvas is behind other elements */
+}
+
+/* Swiper Navigation Arrows */
+.swiper-button-prev,
+.swiper-button-next {
+  position: absolute;
+  color: #333;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  top: 365px;
+}
+
+.swiper-button-prev {
+  margin-left: 230px;
+}
+
+.swiper-button-next {
+  margin-right: 800px;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Gray Color for Disabled Arrows */
+.swiper-button-disabled {
+  color: gray !important;
+  pointer-events: none; /* Disable interaction */
+}
+
+/* Movable Text Box */
+/* Movable Text Box */
+.movable-textbox {
+  position: absolute;
+  width: 250px;
+  height: 60px;
+  background-color: transparent;
+  margin-left: 3px;
+  font-size: 16px;
+  resize: both;
+  left: 40px;
+  top: 200px;
+  font-family: Arial;
+  line-height: 1.5;
+  overflow: auto;
+  outline: none;
+  resize: none;
+  border: none; /* Initial border */
+  cursor: move;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.movable-textbox:focus {
+  border: 3px solid #ccc; /* Border when focused */
+}
+
+.movable-textbox.no-focus {
+  border: none; /* No border when not focused */
+}
+
+.color-option[data-color="#dc143c"] {
+  background-color: #dc143c;
+}
+
+.color-option[data-color="#1e90ff"] {
+  background-color: #1e90ff;
+}
+
+.color-option[data-color="#ff1493"] {
+  background-color: #ff1493;
+}
+
+.color-option[data-color="#2e8b57"] {
+  background-color: #2e8b57;
+}
+
+.color-option[data-color="#a52a2a"] {
+  background-color: #a52a2a;
+}
+
+.color-option[data-color="#8a2be2"] {
+  background-color: #8a2be2;
+}
+
+.color-option[data-color="#000000"] {
+  background-color: #000000;
+}
+
+.color-option[data-color="#da70d6"] {
+  background-color: #da70d6;
+}
+
+.color-option[data-color="#9acd32"] {
+  background-color: #9acd32;
+}
+
+.color-option[data-color="#ff6347"] {
+  background-color: #ff6347;
+}
+#color_icon {
+  cursor: pointer;
+  display: inline-block;
+}
+#color_icon i {
+  margin-top: 4px;
+  color: black; /* Initial color of the icon */
+  background-color: #ededede8; /* Initial background color of the icon */
+  clip-path: circle(50% at 50% 50%);
+
+  transform: scale(1.5); /* Scale the icon by 1.5 times */
+}
+#colorPickerPanel {
+  position: absolute;
+  z-index: 1;
+  top: 70px;
+  left: -126px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px;
+  width: 250px;
+  display: none;
+}
+
+#colorPickerPanel.show {
+  display: block;
+}
+.hidden {
+  display: none;
+}
+#colorPickerPanel.hidden {
+  display: none;
+}
+
+.color-option {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin: 5px;
+  display: inline-block; /* add this to display color options horizontally */
+}
+
+/* Feature Panel */
+.feature-panel {
+  position: absolute;
+  top: 70px;
+  right: 293px;
+  padding: 10px;
+  width: 500px;
+  height: auto;
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 2; /* Ensure it is on top of other elements */
+}
+.feature-panel .language-label {
+  font-size: 16px;
+}
+
+.language-text-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  gap: 0;
+}
+.language-text-container::after {
+  content: "";
+  position: absolute;
+  top: 20%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #ccc;
+  margin-top: -0.5px;
+}
+#language-container {
+  display: flex;
+  align-items: center;
+  padding: 1px;
+  width: 95.9%;
+  margin: 0 auto; /* Center the container */
+}
+.language-label {
+  font-size: 16px;
+  font-weight: normal;
+
+  margin-right: 10px;
+}
+
+/* Dropdown Box */
+.dropdown-box {
+  position: relative;
+  flex-grow: 1;
+  margin-left: 195px;
+}
+
+/* Dropdown Input */
+#language {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23666'%3E%3Cpath d='M4.646 6.646a.5.5 0 0 1 .708 0L8 9.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px top 9px;
+
+  background-size: 20px 20px; /* Adjust the size of the dropdown arrow */
+  outline: none;
+  line-height: 1.5;
+}
+
+/* Hide default arrow */
+.dropdown-input::-ms-expand {
+  display: none;
+}
+.dropdown-input {
+  outline: none;
+}
+#fontFamily,
+#fontStyle {
+  width: 60%;
+  padding: 10px; /* Add padding for better usability */
+  font-size: 16px; /* Increase font size */
+  border: 1px solid #ccc; /* Set a border */
+  border-radius: 4px; /* Rounded corners */
+  -webkit-appearance: none; /* For WebKit browsers */
+  -moz-appearance: none; /* For Mozilla browsers */
+  appearance: none; /* Remove default dropdown arrow */
+  background-color: #fff; /* Background color for the dropdown */
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23666'%3E%3Cpath d='M4.646 6.646a.5.5 0 0 1 .708 0L8 9.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 38px 48px; /* Adjust the size of the dropdown arrow */
+}
+
+#font_size {
+  margin-left: 9px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+#color,
+#alignment,
+#line_height {
+  margin-top: 4px;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+#color_icon,
+#alignment_icon,
+#line_height_icon {
+  margin-top: 17px;
+  cursor: pointer;
+}
+.feature-panel .dropdown-box select {
+  border: none;
+  outline: none;
+}
+/* Add margin-bottom to maintain gaps between rows */
+.feature-panel .row {
+  margin-bottom: 10px;
+}
+
+/* Ensure last row does not have extra margin */
+.feature-panel .row:last-child {
+  margin-bottom: 0;
+}
+
+.feature-panel .dropdown-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: auto;
+  margin-left: 300px;
+}
+/* General textarea styling */
+.feature-panel .big-textarea {
+  width: 99%; /* Full width of the container */
+  padding-bottom: 100px; /* Increase padding for better usability */
+  font-size: 16px;
+  font-family: Arial;
+  resize: none; /* Disable resizing the textarea */
+  border: none;
+  box-sizing: border-box;
+  background-color: #fff; /* Set background color for textarea */
+  color: #a9a9a9;
+  padding-top: 20px;
+  padding-left: 20px;
+}
+.feature-panel .big-textarea:focus {
+  border-color: #ccc; /* Change to the desired color or remove this line to remove the border altogether */
+}
+#row_3 {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.option {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding-right: 20px;
+  width: 100%;
+}
+
+/* Ensure the panel does not affect the canvas position */
+.feature-panel > * {
+  flex: 0 0 auto;
+}
+
+/* Font Settings */
+.font-settings {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.font-settings select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+#fontSize {
+  width: 60%;
+  border: 1px solid #ccc;
+  padding: 1px;
+  border-radius: 0;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  margin-top: 15px;
+}
+
+/* Style the select element */
+
+/* Ensure select is responsive and consistent */
+
+/* Style for the arrow inside the dropdown */
+
+.language-text-container .dropdown-input {
+  color: #a9a9a9;
+}
+/* Specific for start and end animation dropdowns */
+.feature-panel #startAnimation,
+.feature-panel #endAnimation {
+  width: 240px; /* Larger size for visibility */
+  border: 1px solid #ccc; /* Border around dropdown */
+  padding: 10px; /* Add padding for better usability */
+  font-size: 16px; /* Increase font size */
+  border-radius: 4px; /* Rounded corners */
+  -webkit-appearance: none; /* For WebKit browsers */
+  -moz-appearance: none; /* For Mozilla browsers */
+  appearance: none; /* Remove default dropdown arrow */
+  background-color: #fff; /* Background color for the dropdown */
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23666'%3E%3Cpath d='M4.646 6.646a.5.5 0 0 1 .708 0L8 9.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 38px 48px; /* Adjust the size of the dropdown arrow */
+}
+
+/* Text area settings for multi-line input */
+
+/* Animation Settings */
+.row_animations {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.row_animations .dropdown-input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+#arrowMark {
+  text-align: center;
+  cursor: pointer;
+  padding: 5px;
+  position: absolute;
+  top: 30px; /* Adjusted to be below the tipText */
+  left: 463px;
+  padding: 10px;
+  width: 500px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 2;
+}
+#tip {
+  position: absolute;
+  top: 50px; /* Adjusted to be above the horizontalBox */
+  left: 770px; /* Adjusted to match the left position of the horizontalBox */
+  padding: 30px;
+  margin-bottom: 0;
+  z-index: 2;
+}
+i.fa-solid.fa-arrow-left {
+  font-size: 21px; /* set font size to match width and height */
+}
+#tipText {
+  margin: 0;
+  font-size: 16px;
+
+  color: #7f7f7f;
+}
+
+.horizontal-box {
+  text-align: center;
+  padding: 10px;
+  display: flex;
+  width: 10%;
+  position: absolute;
+  top: 100px;
+  left: 715px;
+  height: auto;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 2;
+}
+
+.horizontal-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 446px;
+  height: 100px;
+}
+.horizontal-options .option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+.horizontal-options .option {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px;
+  text-align: center;
+}
+.horizontal-options .option i {
+  padding-top: 20px;
+  width: 10px;
+  height: 10px;
+}
+.horizontal-options .option p {
+  padding-top: 0;
+  margin-top: 8px;
+  margin-bottom: 12px;
+}
+.horizontal-options .option img {
+  padding-top: 20px;
+  width: 25px;
+  height: 25px;
+}
+
+#arrowMark {
+  display: none;
+}
+/* Responsive design for smaller screens */
+/* Responsive Styles */
+@media (max-width: 768px) {
+  /* Adjust canvas size and position */
+  .canvas {
+    width: 50%;
+    height: auto;
+    left: 20%;
+    top: 20%;
+    aspect-ratio: 9 / 16;
+    border: 8px solid #333;
+  }
+
+  /* Adjust swiper navigation arrows */
+  .swiper-button-prev,
+  .swiper-button-next {
+    width: 30px;
+    height: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .swiper-button-prev {
+    margin-left: 33px;
+  }
+
+  .swiper-button-next {
+    margin-right: 50px;
+  }
+
+  /* Adjust movable text box */
+  .movable-textbox {
+    width: 80%;
+    height: auto;
+    left: 10%;
+    top: 20%;
+    font-size: 14px;
+  }
+
+  /* Adjust feature panel */
+  .feature-panel {
+    width: 80%; /* Adjust width for better fit */
+    right: 10%; /* Center it */
+    top: 76%;
+    padding: 10px; /* Add some padding for spacing */
+    box-sizing: border-box; /* Ensure padding is included in width */
+    overflow: hidden; /* Prevent overflow */
+  }
+
+  /* Adjust dropdown inputs */
+  #language,
+  #fontFamily,
+  #fontStyle {
+    width: 100%;
+    font-size: 14px; /* Adjust font size */
+    padding: 8px; /* Adjust padding */
+    box-sizing: border-box; /* Ensure padding is included in width */
+    line-height: 1.2; /* Adjust line height */
+  }
+
+  /* Adjust big textarea */
+  .feature-panel .big-textarea {
+    width: 100%;
+    font-size: 14px; /* Adjust font size */
+    padding: 10px; /* Adjust padding */
+    box-sizing: border-box; /* Ensure padding is included in width */
+    line-height: 1.2; /* Adjust line height */
+  }
+
+  /* Adjust horizontal box */
+  .horizontal-box {
+    width: 80%; /* Reduce width */
+    left: 10%; /* Center horizontally */
+    top: 82%; /* Move it down slightly */
+    right: 10%; /* Adjust right to match left */
+  }
+  .language-text-container::after {
+    content: "";
+    position: absolute;
+    top: 30%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    margin-top: -0.5px;
+  }
+  /* Adjust horizontal options */
+  .horizontal-options {
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .horizontal-options .option {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 2px;
+  }
+
+  /* Adjust tip */
+  #tip {
+    left: 5%;
+    top: 5%;
+    text-align: center;
+    width: 100%;
+  }
+}

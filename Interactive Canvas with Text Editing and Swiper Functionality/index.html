@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SwiperJS Canvas Navigation with Movable Text Box</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <!-- Arrow Mark -->
+
+    <!-- Swiper Container -->
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <!-- Slide 1 -->
+        <div class="swiper-slide">
+          <div class="canvas" role="region" aria-label="Canvas">
+            <!-- Movable Text Box -->
+            <textarea
+              class="movable-textbox"
+              id="canvas1-text"
+              aria-label="Editable text"
+              rows="3"
+              contenteditable="true"
+              draggable="true"
+            >
+            Hi Celebrare Team
+            </textarea>
+          </div>
+        </div>
+        <!-- Slide 2 -->
+        <div class="swiper-slide">
+          <div class="canvas" role="region" aria-label="Canvas">
+            <!-- Movable Text Box -->
+            <textarea
+              class="movable-textbox"
+              id="canvas2-text"
+              aria-label="Editable text"
+              rows="3"
+              contenteditable="true"
+              draggable="true"
+            >
+            I'm excited to join Celebrare's creative team.
+            </textarea>
+          </div>
+        </div>
+        <!-- Slide 3 -->
+        <div class="swiper-slide">
+          <div class="canvas" role="region" aria-label="Canvas">
+            <!-- Movable Text Box -->
+            <textarea
+              class="movable-textbox"
+              id="canvas3-text"
+              aria-label="Editable text"
+              rows="3"
+              contenteditable="true"
+              draggable="true"
+            >
+            I'm ready to learn and grow.</textarea
+            >
+          </div>
+        </div>
+      </div>
+      <!-- Navigation Arrows -->
+      <div
+        class="swiper-button-next"
+        role="button"
+        aria-label="Next Slide"
+        onKeyDown="handleKeyDown(event)"
+        tabindex="0"
+      ></div>
+      <div
+        class="swiper-button-prev"
+        role="button"
+        aria-label="Previous Slide"
+        tabindex="0"
+        onKeyDown="handleKeyDown(event)"
+      ></div>
+    </div>
+
+    <div id="tip">
+      <p id="tipText">"Tip: Click the text to see all editing options"</p>
+    </div>
+    <div id="arrowMark" class="arrow-mark">
+      <i class="fa-solid fa-arrow-left"></i>
+    </div>
+    <!-- Horizontal Box -->
+
+    <div id="horizontalBox" class="horizontal-box">
+      <div class="horizontal-options">
+        <div class="option">
+          <img src="./images/T_png.png" alt="T" />
+          <p>Add Text</p>
+        </div>
+        <div class="option">
+          <img src="./images/Image.png" alt="T" />
+          <p>Add Image</p>
+        </div>
+      </div>
+    </div>
+    <!-- Feature Panel -->
+    <div class="feature-panel">
+      <div class="row language-text-container">
+        <div id="language-container">
+          <label class="language-label" for="language">Language</label>
+          <div class="dropdown-box">
+            <select id="language" class="dropdown-input">
+              >
+            </select>
+          </div>
+        </div>
+
+        <textarea
+          id="canvasText"
+          rows="3"
+          class="big-textarea"
+          title="Canvas Text"
+          placeholder="Enter text here"
+        >
+        </textarea>
+      </div>
+      <div class="row font-settings">
+        <select id="fontFamily" class="dropdown-input" title="Font Family">
+          <option value="Arial">Arial</option>
+          <option value="Times New Roman">Times New Roman</option>
+          <option value="Courier New">Courier New</option>
+        </select>
+        <select id="fontStyle" class="dropdown-input" title="Font Style">
+          <option value="normal">Normal</option>
+          <option value="italic">Italic</option>
+        </select>
+      </div>
+      <div class="row font-options" id="row_3">
+        <div class="option">
+          <div>
+            <select id="fontSize" class="dropdown-input" title="Font Size">
+              <option value="12px">12</option>
+              <option value="14px">14</option>
+              <option value="16px">16</option>
+            </select>
+          </div>
+          <div id="font_size"><label for="fontSize">Font Size</label></div>
+        </div>
+        <div class="option">
+          <div id="color_icon">
+            <i class="fa-regular fa-circle"></i>
+          </div>
+
+          <div id="color">
+            <label for="colorPicker">Color</label>
+          </div>
+
+          <div id="colorPickerPanel" class="color-picker-panel">
+            <div class="color-option" data-color="#dc143c"></div>
+            <div class="color-option" data-color="#1e90ff"></div>
+            <div class="color-option" data-color="#ff1493"></div>
+            <div class="color-option" data-color="#2e8b57"></div>
+            <div class="color-option" data-color="#a52a2a"></div>
+            <div class="color-option" data-color="#8a2be2"></div>
+            <div class="color-option" data-color="#000000"></div>
+            <div class="color-option" data-color="#da70d6"></div>
+            <div class="color-option" data-color="#9acd32"></div>
+            <div class="color-option" data-color="#ff6347"></div>
+          </div>
+        </div>
+
+        <div class="option">
+          <div id="alignment_icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-text-center"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M4 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5-.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5-.5 0 0 1-.5-.5m2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5-.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5-.5 0 0 1-.5-.5"
+              />
+            </svg>
+          </div>
+
+          <div id="alignment">
+            <label for="alignmentControl">Alignment</label>
+          </div>
+        </div>
+
+        <div class="option">
+          <div id="line_height_icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-sort-up"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M3.5 12.5a.5.5 0 0 1-1 0V3.707L1.354 4.854a.5.5 0 1 1-.708-.708l2-1.999.007-.007a.5.5 0 0 1 .7.006l2 2a.5.5 0 1 1-.707.708L3.5 3.707z"
+              />
+            </svg>
+            <div id="line_height">
+              <label for="lineHeight">Line Height</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row_animations">
+        <select
+          id="startAnimation"
+          class="dropdown-input"
+          title="Start Animation"
+        >
+          <option>
+            <p>Choose Start</p>
+            <p>Animation</p>
+          </option>
+          <option value="fadeIn">Fade In</option>
+          <option value="slideIn">Slide In</option>
+        </select>
+        <select id="endAnimation" class="dropdown-input" title="End Animation">
+          <option>Choose End Animation</option>
+          <option value="fadeOut">Fade Out</option>
+          <option value="slideOut">Slide Out</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
